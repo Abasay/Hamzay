@@ -24,12 +24,12 @@ export default function RootLayout({
 
       <body className={`bg-[#FCFCFC] dark:bg-black ${inter.className}`}>
         <ErrorBoundary>
-          <Providers>
-            <Header />
-            {children}
-            <Footer />
-            <ScrollToTop />
-          </Providers>
+          {/* <Providers> */}
+          <Header />
+          {children}
+          <Footer />
+          <ScrollToTop />
+          {/* </Providers> */}
         </ErrorBoundary>
       </body>
     </html>
