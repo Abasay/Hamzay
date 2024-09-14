@@ -61,7 +61,9 @@ export default function HeroSection() {
   return (
     <section className="relative z-10 mt-20 overflow-hidden bg-gray-900 py-16 pb-16 text-white  dark:bg-gray-dark md:pb-[120px] md:pt-[150px] xl:pb-[160px] 2xl:pb-[200px] ">
       <div className="container mx-auto flex flex-col items-center text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Techie's Blog</h1>
+        <h1 className="mb-4 text-4xl font-bold">
+          Welcome to Techie&apos;s Blog
+        </h1>
         <p className="mb-6 text-xl">
           Your source for the latest tech write-ups and in-depth reviews of
           trending products.
@@ -101,8 +103,8 @@ export default function HeroSection() {
                   tabIndex={0}
                   className="menu dropdown-content z-[1] mx-auto -mt-5 w-full rounded-sm bg-base-100 p-2 text-zinc-800 shadow transition-all delay-200 duration-700 ease-in-out "
                 >
-                  {dataRes.map((data: any) => (
-                    <li className="menu-item">
+                  {dataRes.map((data: any, idx: number) => (
+                    <li className="menu-item" key={idx}>
                       <Link href={data.affiliateLink || ""}>
                         <span className="menu-content">
                           <div className="menu-title">{data.title}</div>
