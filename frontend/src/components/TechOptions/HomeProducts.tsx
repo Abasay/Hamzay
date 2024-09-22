@@ -51,7 +51,7 @@ export default function ProductReviews() {
                   target="_blank"
                   className="text-blue-500 hover:underline"
                 >
-                  Buy Now
+                  Read more
                 </a>
               </div>
             </div>

@@ -119,7 +119,7 @@ export default function HeroSection() {
               </div>
             )}
           </div>
-          <div className="absolute left-[18%] top-20 flex space-x-4">
+          <div className=" absolute left-[5%] top-20 flex flex-col gap-4 space-x-0 sm:left-[17%] sm:flex-row sm:space-x-4">
             <Link
               href="/blogs"
               className="btn bg-blue-500 px-6 py-2 text-white hover:bg-transparent"
