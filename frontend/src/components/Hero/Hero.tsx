@@ -126,12 +126,12 @@ export default function HeroSection() {
             >
               Read Blogs
             </Link>
-            <a
+            <Link
               href="/products"
               className="btn rounded-lg border border-blue-500 bg-transparent px-6 py-2 text-white hover:bg-transparent"
             >
               View Products
-            </a>
+            </Link>
           </div>
         </div>
       </div>
