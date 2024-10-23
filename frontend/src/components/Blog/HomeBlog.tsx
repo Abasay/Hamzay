@@ -1,7 +1,22 @@
 "use client";
-import { useState } from "react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
-export default function BlogHighlights() {
+export default function BlogHighlights(props: {
+  blogs: [
+    {
+      title: string;
+      description: string;
+      tags: string;
+      category: string;
+      author: string;
+      keywords: string;
+      image: string;
+      slug: string;
+      _id: string;
+    },
+  ];
+}) {
   // const blogs = [
   //   {
   //     id: 1,
@@ -53,41 +68,46 @@ export default function BlogHighlights() {
   //   },
   // ];
 
-  const [blogs, setBlogs] = useState<
-    {
-      title: string;
-      description: string;
-      tags: string;
-      category: string;
-      author: string;
-      keywords: string;
-      blogImage: string;
-      slug: string;
-    }[]
-  >([]);
+  // const [blogs, setBlogs] = useState<
+  //   {
+  //     title: string;
+  //     description: string;
+  //     tags: string;
+  //     category: string;
+  //     author: string;
+  //     keywords: string;
+  //     image: string;
+  //     slug: string;
+  //   }[]
+  // >([]);
 
   const [loading, setLoading] = useState<boolean>(false);
+  const { blogs } = props;
 
-  const handleGetBlogs = async () => {
-    try {
-      const request = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL as string}/api/blogs`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            // Authorization: `Bearer {token}`,
-          },
-        },
-      );
-      const response = await request.json();
-      setBlogs(response.data);
-      console.log(response);
-    } catch (error: any) {
-      console.error(error);
-      //  toast.error(error.message);
-    }
-  };
+  // const handleGetBlogs = async () => {
+  //   try {
+  //     const request = await fetch(
+  //       `${process.env.NEXT_PUBLIC_BASE_URL as string}/api/blogs/latest?type=blog`,
+  //       {
+  //         method: "GET",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           // Authorization: `Bearer {token}`,
+  //         },
+  //       },
+  //     );
+  //     const response = await request.json();
+  //     setBlogs((response.data as []).splice(0, 3));
+  //     console.log(response);
+  //   } catch (error: any) {
+  //     console.error(error);
+  //     //  toast.error(error.message);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   handleGetBlogs();
+  // }, []);
 
   return (
     <section className="bg-gray-100 py-16">
@@ -100,28 +120,32 @@ export default function BlogHighlights() {
               className="overflow-hidden rounded-lg bg-white shadow-lg"
             >
               <img
-                src={blog.blogImage}
+                src={blog.image}
                 alt={blog.title}
                 className="h-48 w-full object-cover"
               />
               <div className="p-6">
                 <h3 className="mb-4 text-2xl font-semibold">{blog.title}</h3>
                 <p className="mb-4 text-gray-600">{blog.description}</p>
-                <a
-                  href={`/blogs/${blog.slug}`}
+                <Link
+                  href={`/blog/${blog.slug || blog._id}`}
+                  target="_blank"
                   className="text-blue-500 hover:underline"
                 >
                   Read More
-                </a>
+                </Link>
               </div>
             </div>
           ))}
         </div>
       </div>
       <div className="mt-5 text-center">
-        <button className="btn text-base font-light text-slate-600">
+        <Link
+          href={"/blogs"}
+          className="btn text-base font-light text-slate-600"
+        >
           Load More
-        </button>
+        </Link>
       </div>
     </section>
   );

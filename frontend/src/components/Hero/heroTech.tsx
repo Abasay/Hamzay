@@ -17,45 +17,44 @@ const HeroTech = () => {
           center={true}
           mb="30px"
         />
-        <div className="container">
-          <div className="-mx-4 flex flex-wrap">
-            <div className="relative w-full px-4">
-              <div className=" mx-auto">
-                <Image
-                  src="https://th.bing.com/th/id/OIP.dHLijXUKJHKHUmmmPfXVQgHaEg?rs=1&pid=ImgDetMain"
-                  alt="Hero Image"
-                  width={1000}
-                  height={100}
-                  className="h-[700px] w-full rounded-2xl object-cover object-center"
-                />
-              </div>
-              {/* <div>
+        <div className="relative w-full">
+          <div className=" mx-auto">
+            <Image
+              src="https://th.bing.com/th/id/OIP.dHLijXUKJHKHUmmmPfXVQgHaEg?rs=1&pid=ImgDetMain"
+              alt="Hero Image"
+              width={1000}
+              height={100}
+              className="h-[700px] w-full rounded-sm object-cover object-center"
+            />
+          </div>
+          {/* <div>
                 <UploadProfileImage />
               </div> */}
-              <div>
-                <div className=" absolute top-[60%] ml-12 flex h-[280px] w-[70%] flex-col gap-3 rounded-2xl bg-slate-100 bg-transparent bg-opacity-15 px-6 py-8 shadow-xl ">
-                  <span className=" w-[120px] rounded-md bg-blue-600 p-1 text-center tracking-wide text-slate-50">
-                    Technology
-                  </span>
-                  <h2 className="text-3xl font-bold text-zinc-100 ">
-                    The impact of Technology on the workplace: How Technology is
-                    changing
-                  </h2>
-                  <div className=" mt-2 flex flex-row items-center gap-3 text-base font-medium text-slate-50 ">
-                    <Image
-                      src="/images/hero/hero-img1.png"
-                      alt="Hero Image"
-                      width={20}
-                      height={20}
-                      className="h-[50px] w-[50px] rounded-full object-cover object-center"
-                    />
-                    <h5>Hamzay Ayodokun</h5>
-                    <span className=" ml-4">August 20, 2022</span>
-                  </div>
-                </div>
+          <div>
+            <div className=" absolute top-[60%] ml-12 flex h-[280px] w-[70%] flex-col gap-3 rounded-2xl bg-slate-100 bg-transparent bg-opacity-15 px-6 py-8 shadow-xl ">
+              <span className=" w-[120px] rounded-md bg-blue-600 p-1 text-center tracking-wide text-slate-50">
+                Technology
+              </span>
+              <h2 className="text-3xl font-bold text-zinc-100 ">
+                The impact of Technology on the workplace: How Technology is
+                changing
+              </h2>
+              <div className=" mt-2 flex flex-row items-center gap-3 text-base font-medium text-slate-50 ">
+                <Image
+                  src="/images/hero/hero-img1.png"
+                  alt="Hero Image"
+                  width={20}
+                  height={20}
+                  className="h-[50px] w-[50px] rounded-full object-cover object-center"
+                />
+                <h5>Hamzay Ayodokun</h5>
+                <span className=" ml-4">August 20, 2022</span>
               </div>
             </div>
           </div>
+        </div>
+        <div className="container">
+          <div className="-mx-4 flex flex-wrap"></div>
         </div>
         <div className="absolute right-0 top-0 z-[-1] opacity-30 lg:opacity-100">
           <svg

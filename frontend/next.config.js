@@ -13,6 +13,11 @@ const nextConfig = {
         hostname: "th.bing.com",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        port: "",
+      },
     ],
   },
 };

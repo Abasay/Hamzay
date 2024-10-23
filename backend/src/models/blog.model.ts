@@ -9,6 +9,8 @@ interface IBlog extends Document {
   keywords: string[];
   content: string
   comment?: string
+  category:string
+  blogType: string
 }
 
 const BlogSchema = new mongoose.Schema<IBlog>({
@@ -47,8 +49,18 @@ const BlogSchema = new mongoose.Schema<IBlog>({
     type: Types.ObjectId,
     ref: 'Comment',
     default: null
+  },
+  category:{
+    type: String
+  },
+  blogType:{
+    type: String
   }
-});
+}, {
+  timestamps: true
+}
+
+);
 
 const Blog = mongoose.model<IBlog>('Blog', BlogSchema);
 

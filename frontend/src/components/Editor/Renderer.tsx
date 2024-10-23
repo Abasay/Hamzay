@@ -5,6 +5,7 @@ import React from "react";
 // Recursive function to render Slate JSON
 const renderNode = (node) => {
   if (node.type === "paragraph") {
+    console.log(node);
     return (
       <p className="mb-10 text-base font-medium leading-relaxed text-body-color sm:text-lg sm:leading-relaxed lg:text-base lg:leading-relaxed xl:text-lg xl:leading-relaxed">
         {node.children.map((child, i) => {

@@ -25,6 +25,7 @@ import { Picker } from "emoji-mart";
 import { categories } from "./categories";
 import toast, { Toaster } from "react-hot-toast";
 import SlateRenderer from "./Renderer";
+import { useRouter } from "next/navigation";
 
 const initialValue: Descendant[] = [
   {
@@ -303,15 +304,17 @@ const HamzayEditor = () => {
     keywords: string;
     blogImage: string;
     slug: string;
+    blogType: string;
   }>({
     title: "",
     description: "",
     tags: "",
-    category: "",
+    category: "blog",
     author: "",
     keywords: "",
     blogImage: "",
     slug: "",
+    blogType: "",
   });
 
   const handleEditBlog = (blog: any) => {
@@ -327,6 +330,7 @@ const HamzayEditor = () => {
       keywords: blog.keywords,
       blogImage: blog.blogImage,
       slug: blog.slug,
+      blogType: blog.blogType,
     });
     setBlogId(blog._id);
     // setValue(JSON.parse(blog.content));
@@ -345,6 +349,8 @@ const HamzayEditor = () => {
 
   const [blogs, setBlogs] = useState<any[]>([]);
 
+  const router = useRouter();
+
   const handlePublish = async () => {
     try {
       if (
@@ -353,7 +359,8 @@ const HamzayEditor = () => {
         blogDetails.tags === "" ||
         blogDetails.category === "" ||
         blogDetails.author === "" ||
-        blogDetails.slug === ""
+        blogDetails.slug === "" ||
+        !blogDetails.blogType
       )
         return alert("Please fill all fields.");
 
@@ -384,6 +391,7 @@ const HamzayEditor = () => {
       if (response.success) {
         toast.success("Blog published successfully.");
         toast.dismiss();
+        router.refresh();
       }
     } catch (error: any) {
       toast.error(error.message);
@@ -513,6 +521,23 @@ const HamzayEditor = () => {
             "
                 placeholder="Tags (separated by commas)"
               />
+            </div>
+            <div className="flex w-full items-center gap-2">
+              <p className=" text-base font-semibold">Blog Type:</p>
+
+              <select
+                title="Blog Type"
+                name="blogType"
+                id=""
+                value={blogDetails.blogType}
+                onChange={handleChange}
+                className="
+            w-[150px] max-w-[400px] rounded-sm border-[2px] border-zinc-400  bg-white p-[5px] text-sm font-normal text-zinc-700 focus:outline-none
+            "
+              >
+                <option value="blog">Blog</option>
+                <option value="product">Product</option>
+              </select>
             </div>
             <div>
               <input

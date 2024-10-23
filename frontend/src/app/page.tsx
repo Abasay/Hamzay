@@ -13,24 +13,83 @@ import Pricing from "@/components/Pricing";
 import ProductReviews from "@/components/TechOptions/HomeProducts";
 import Testimonials from "@/components/Testimonials";
 import Video from "@/components/Video";
-import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Hamzay Blogging Site",
-  description: "This is a blogging site for Hamzay",
+// Server Component: Fetch blogs data
+async function getBlogs() {
+  try {
+    const request = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL as string}/api/blogs/latest?type=blog`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        next: { revalidate: 30 },
+      },
+    );
+    const posts = await request.json();
+    return posts.data;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+}
 
-  // other metadata
-};
+async function getProducts() {
+  try {
+    const request = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL as string}/api/blogs/latest?type=product`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        next: { revalidate: 30 },
+      },
+    );
+    const posts = await request.json();
+    return posts.data;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+}
 
-export default function Home() {
+export default async function Home() {
+  const posts = (await getBlogs()) as [
+    {
+      title: string;
+      description: string;
+      tags: string;
+      category: string;
+      author: string;
+      keywords: string;
+      image: string;
+      slug: string;
+      _id: string;
+    },
+  ];
+  const products = (await getProducts()) as [
+    {
+      title: string;
+      description: string;
+      tags: string;
+      category: string;
+      author: string;
+      keywords: string;
+      image: string;
+      slug: string;
+      _id: string;
+    },
+  ];
+
   return (
     <>
       <ScrollUp />
       <HeroSection />
-      <BlogHighlights />
-      <ProductReviews />
+      <BlogHighlights blogs={posts} />
+      <ProductReviews products={products} />
       <AuthorBio />
-
       {/* <Hero />
       <Features />
       <Video /> */}
@@ -39,7 +98,7 @@ export default function Home() {
       {/* <AboutSectionTwo /> */}
       <Testimonials />
       {/* <Pricing /> */}
-      <Blog />
+      <Blog blogs={posts} /> {/* Pass posts to the Blog component */}
       <Contact />
     </>
   );

@@ -10,20 +10,53 @@ export const metadata: Metadata = {
   // other metadata
 };
 
-const Blog = () => {
+async function getBlogs() {
+  try {
+    const request = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL as string}/api/blogs/latest?type=blog`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        next: { revalidate: 30 },
+      },
+    );
+    const posts = await request.json();
+    return posts.data;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+}
+
+const Blog = async () => {
+  const posts = (await getBlogs()) as [
+    {
+      title: string;
+      description: string;
+      tags: string;
+      category: string;
+      author: string;
+      keywords: string;
+      image: string;
+      slug: string;
+      _id: string;
+    },
+  ];
   return (
     <>
       <Breadcrumb
         pageName="Our Blogs"
-        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In varius eros eget sapien consectetur ultrices. Ut quis dapibus libero."
+        description="This is the list of our Blogs"
       />
 
       <section className="pb-[120px] pt-[120px]">
         <div className="container">
           <div className="-mx-4 flex flex-wrap justify-center">
-            {blogData.map((blog) => (
+            {posts.map((blog) => (
               <div
-                key={blog.id}
+                key={blog._id}
                 className="w-full px-4 md:w-2/3 lg:w-1/2 xl:w-1/3"
               >
                 <SingleBlog blog={blog} />
