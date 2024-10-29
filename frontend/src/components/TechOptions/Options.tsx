@@ -4,55 +4,61 @@ import React, { useRef, useState } from "react";
 const TECHOPTIONS = [
   {
     id: 1,
-    title: "Video Games",
+    title: "Wearable device",
     image:
       "https://matjar.themejr.net/wp-content/uploads/2024/07/game-cat.webp",
   },
   {
     id: 2,
-    title: "Phones & Tablets",
+    title: "Mobile device",
     image:
       "https://matjar.themejr.net/wp-content/uploads/2024/07/phone-cat.webp",
   },
   {
     id: 3,
-    title: "Laptops & Computers",
+    title: "Home devices",
     image:
       "https://matjar.themejr.net/wp-content/uploads/2024/07/cat-laptop.webp",
   },
   {
     id: 4,
-    title: "Smart Watches & Gadgets",
+    title: "Audio devices",
     image:
       "https://matjar.themejr.net/wp-content/uploads/2024/07/watch-cat.webp",
   },
   {
     id: 5,
-    title: "Wearable Devices",
+    title: "Gaming gadget",
     image:
       "https://matjar.themejr.net/wp-content/uploads/2024/07/cat-laptop.webp",
   },
   {
     id: 6,
-    title: "Mobile Devices",
+    title: "Accessories",
     image:
       "https://matjar.themejr.net/wp-content/uploads/2024/07/watch-cat.webp",
   },
   {
     id: 7,
-    title: "Home Devices",
+    title: "Travel gadget",
     image:
       "https://matjar.themejr.net/wp-content/uploads/2024/07/cat-laptop.webp",
   },
   {
     id: 8,
-    title: "Audio Devices",
+    title: "Office gadget",
     image:
       "https://matjar.themejr.net/wp-content/uploads/2024/07/cat-laptop.webp",
   },
   {
-    id: 8,
-    title: "Travel Gadget",
+    id: 9,
+    title: "Softwares",
+    image:
+      "https://matjar.themejr.net/wp-content/uploads/2024/07/cat-laptop.webp",
+  },
+  {
+    id: 10,
+    title: "Health and Fitness",
     image:
       "https://matjar.themejr.net/wp-content/uploads/2024/07/cat-laptop.webp",
   },

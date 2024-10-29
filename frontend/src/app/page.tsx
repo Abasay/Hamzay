@@ -19,15 +19,10 @@ async function getBlogs() {
   try {
     const request = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL as string}/api/blogs/latest?type=blog`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        next: { revalidate: 30 },
-      },
     );
+    console.log(request);
     const posts = await request.json();
+    console.log(posts);
     return posts.data;
   } catch (error) {
     console.error(error);

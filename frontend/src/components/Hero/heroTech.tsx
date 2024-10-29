@@ -298,18 +298,18 @@ const HeroTech = () => {
           </svg>
         </div>
         <Options />
-        <div className="mx-auto my-auto mt-40 flex h-32 w-[70%] flex-col items-center gap-2 rounded-md bg-slate-200 py-3 text-center text-gray-400">
+        {/* <div className="mx-auto my-auto mt-40 flex h-32 w-[70%] flex-col items-center gap-2 rounded-md bg-slate-200 py-3 text-center text-gray-400">
           <span>Advertisement</span>
           <p className="text-xl font-semibold tracking-wider">
             You can place ads here
           </p>
           <span className="text-xl">750x100</span>
-        </div>
-        <div className="mt-5 text-center">
+        </div> */}
+        {/* <div className="mt-5 text-center">
           <button className="btn text-base font-light text-slate-600">
             Load More
           </button>
-        </div>
+        </div> */}
       </section>
     </>
   );

@@ -14,6 +14,7 @@ import { Metadata } from "next";
 
 import { notFound } from "next/navigation";
 import SlateRenderer from "@/components/Editor/Renderer";
+import CommentComponent from "@/components/Comments";
 
 // Fetch blog data by slug
 async function getBlogBySlug(slug: string) {
@@ -235,6 +236,7 @@ const BlogDetailsPage = async ({ params }: { params: { slug: string } }) => {
                     <TagButton text={post.tags[4]} />
                   </div>
                 </div>
+                {/* <CommentComponent /> */}
               </div>
             </div>
           </div>
