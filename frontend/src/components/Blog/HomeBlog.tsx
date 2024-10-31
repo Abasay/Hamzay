@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function BlogHighlights(props: {
-  blogs: [
+  blogPosts: [
     {
       title: string;
       description: string;
@@ -82,7 +82,7 @@ export default function BlogHighlights(props: {
   // >([]);
 
   const [loading, setLoading] = useState<boolean>(false);
-  const { blogs } = props;
+  const { blogPosts } = props;
 
   // const handleGetBlogs = async () => {
   //   try {
@@ -114,7 +114,7 @@ export default function BlogHighlights(props: {
       <div className="container mx-auto">
         <h2 className="mb-8 text-center text-3xl font-bold">Featured Blogs</h2>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-          {blogs.map((blog) => (
+          {blogPosts.map((blog) => (
             <div
               key={blog.slug}
               className="overflow-hidden rounded-lg bg-white shadow-lg"
@@ -128,7 +128,7 @@ export default function BlogHighlights(props: {
                 <h3 className="mb-4 text-2xl font-semibold">{blog.title}</h3>
                 <p className="mb-4 text-gray-600">{blog.description}</p>
                 <Link
-                  href={`/blog/${blog.slug || blog._id}`}
+                  href={`/blog/${blog._id}`}
                   target="_blank"
                   className="text-blue-500 hover:underline"
                 >

@@ -59,7 +59,7 @@ export default function HeroSection() {
     }
   }, [searchWord]);
   return (
-    <section className="relative z-10 mt-20 overflow-hidden bg-gray-900 py-16 pb-16 text-white  dark:bg-gray-dark md:pb-[120px] md:pt-[150px] xl:pb-[160px] 2xl:pb-[200px] ">
+    <section className="relative z-10 mt-24 overflow-hidden bg-gray-900 py-16 pb-16 text-white  dark:bg-gray-dark md:pb-[120px] md:pt-[150px] xl:pb-[160px] 2xl:pb-[200px] ">
       <div className="container mx-auto flex flex-col items-center text-center">
         <h1 className="mb-4 text-4xl font-bold">
           Welcome to Techie&apos;s Blog

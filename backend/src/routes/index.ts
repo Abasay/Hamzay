@@ -3,6 +3,7 @@ import {
   deleteBlog,
   getBlog,
   getBlogs,
+  getBlogsByCategory,
   getBlogsByType,
   getLatestBlog,
   getLatestBlogs,
@@ -25,7 +26,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/blogs', getBlogs);
-// router.get('/blogs/category/:category', getBlogsByCategory)
+router.get('/blogs/category/:category', getBlogsByCategory);
 router.get('/blogs/latest', getLatestBlogs);
 router.get('/blog/:id', getBlog);
 

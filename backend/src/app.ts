@@ -11,7 +11,7 @@ import { connectDB } from './configs/config';
 import cors from 'cors';
 
 const app = express();
-
+app.use(cors());
 connectDB();
 
 // view engine setup
@@ -20,32 +20,47 @@ app.set('view engine', 'jade');
 
 // Middleware setup
 app.use(logger('dev'));
-app.use(cors());
 
 // Set a reasonable limit for JSON and URL-encoded payloads
 app.use(express.json({ limit: '50mb' }));
-app.use(express.urlencoded({ extended: false, limit: '50mb', parameterLimit: 1000000 }));
+app.use(
+  express.urlencoded({
+    extended: false,
+    limit: '50mb',
+    parameterLimit: 1000000,
+  })
+);
 
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(
+  express.static(path.join(__dirname, 'public'), { maxAge: '0', etag: false })
+);
+app.use((req, res, next) => {
+  res.setHeader(
+    'Cache-Control',
+    'no-store, no-cache, must-revalidate, proxy-revalidate'
+  );
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Expires', '0');
+  next();
+});
 
 // API routes
 app.use('/api', indexRouter);
 
-// catch 404 and forward to error handler
+// Middleware to handle 404 errors
 app.use((req: Request, res: Response, next: NextFunction) => {
-  next(createError(404));
+  const error = createError(404, 'Not Found');
+  next(error);
 });
 
-// error handler
+// General error handler
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+  // Set the status code based on the error, default to 500 if not set
+  res.status(err.status || 500).json({
+    message: err.message,
+    error: req.app.get('env') === 'development' ? err : {},
+  });
 });
 
 // Start the server

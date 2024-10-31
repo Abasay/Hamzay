@@ -7,12 +7,16 @@ import Image from "next/image";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import SlateRenderer from "@/components/Editor/Renderer";
+import { TECHOPTIONS } from "@/components/TechOptions/Options";
 
 // Fetch blog data by slug
 async function getProductBySlug(slug: string) {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL as string}/api/blog/${slug}`,
+      {
+        next: { revalidate: 10 },
+      },
     );
 
     if (!res.ok) {
@@ -23,6 +27,8 @@ async function getProductBySlug(slug: string) {
     const data = await res.json();
 
     const post = data.data;
+    const relatedBlogs = data.relatedBlogs;
+    const categories = data.categories;
 
     // Log raw content to debug
     console.log("Raw post content:", post.content);
@@ -33,6 +39,8 @@ async function getProductBySlug(slug: string) {
     return {
       ...post, // Spread other post fields
       content: parsedContent, // Parsed content
+      relatedBlogs,
+      categories,
     };
   } catch (error) {
     console.error("Error fetching blog post:", error);
@@ -110,7 +118,12 @@ export async function generateMetadata({
 
 const BlogSidebarPage = async ({ params }: { params: { slug: string } }) => {
   const post = await getProductBySlug(params.slug);
-  const { content, title, author, image, category } = post;
+  const { content, title, author, image, category, relatedBlogs, categories } =
+    post;
+
+  if (!post) {
+    return notFound();
+  }
   return (
     <>
       <section className="overflow-hidden pb-[120px] pt-[180px]">
@@ -161,7 +174,7 @@ const BlogSidebarPage = async ({ params }: { params: { slug: string } }) => {
                         </span>
                         {new Date(post.createdAt as Date).toDateString()}
                       </p>
-                      <p className="mr-5 flex items-center text-base font-medium text-body-color">
+                      {/* <p className="mr-5 flex items-center text-base font-medium text-body-color">
                         <span className="mr-3">
                           <svg
                             width="18"
@@ -175,8 +188,8 @@ const BlogSidebarPage = async ({ params }: { params: { slug: string } }) => {
                           </svg>
                         </span>
                         50
-                      </p>
-                      <p className="flex items-center text-base font-medium text-body-color">
+                      </p> */}
+                      {/* <p className="flex items-center text-base font-medium text-body-color">
                         <span className="mr-3">
                           <svg
                             width="20"
@@ -189,7 +202,7 @@ const BlogSidebarPage = async ({ params }: { params: { slug: string } }) => {
                           </svg>
                         </span>
                         35
-                      </p>
+                      </p> */}
                     </div>
                   </div>
                   <div className="mb-5">
@@ -236,82 +249,43 @@ const BlogSidebarPage = async ({ params }: { params: { slug: string } }) => {
                   Related Posts
                 </h3>
                 <ul className="p-8">
-                  <li className="mb-6 border-b border-body-color border-opacity-10 pb-6 dark:border-white dark:border-opacity-10">
-                    <RelatedPost
-                      title="Best way to boost your online sales."
-                      image="/images/blog/post-01.jpg"
-                      slug="#"
-                      date="12 Feb 2025"
-                    />
-                  </li>
-                  <li className="mb-6 border-b border-body-color border-opacity-10 pb-6 dark:border-white dark:border-opacity-10">
-                    <RelatedPost
-                      title="50 Best web design tips & tricks that will help you."
-                      image="/images/blog/post-02.jpg"
-                      slug="#"
-                      date="15 Feb, 2024"
-                    />
-                  </li>
-                  <li>
-                    <RelatedPost
-                      title="The 8 best landing page builders, reviewed"
-                      image="/images/blog/post-03.jpg"
-                      slug="#"
-                      date="05 Jun, 2024"
-                    />
-                  </li>
+                  {relatedBlogs?.map((blog: any, idx: any) => {
+                    return (
+                      <li
+                        key={idx}
+                        className="mb-6 border-b border-body-color border-opacity-10 pb-6 dark:border-white dark:border-opacity-10"
+                      >
+                        <RelatedPost
+                          title={blog.title}
+                          image={blog.image}
+                          slug={blog._id}
+                          date={new Date(blog.createdAt).toDateString()}
+                        />
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
               <div className="shadow-three mb-10 rounded-sm bg-white dark:bg-gray-dark dark:shadow-none">
                 <h3 className="border-b border-body-color border-opacity-10 px-8 py-4 text-lg font-semibold text-black dark:border-white dark:border-opacity-10 dark:text-white">
-                  Popular Category
+                  Tech Categories
                 </h3>
                 <ul className="px-8 py-6">
-                  <li>
-                    <a
-                      href="#0"
-                      className="mb-3 inline-block text-base font-medium text-body-color hover:text-primary"
-                    >
-                      Tailwind Templates
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#0"
-                      className="mb-3 inline-block text-base font-medium text-body-color hover:text-primary"
-                    >
-                      Landing page
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#0"
-                      className="mb-3 inline-block text-base font-medium text-body-color hover:text-primary"
-                    >
-                      Startup
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#0"
-                      className="mb-3 inline-block text-base font-medium text-body-color hover:text-primary"
-                    >
-                      Business
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#0"
-                      className="mb-3 inline-block text-base font-medium text-body-color hover:text-primary"
-                    >
-                      Multipurpose
-                    </a>
-                  </li>
+                  {categories?.map((option: any) => (
+                    <li key={option}>
+                      <a
+                        href={option}
+                        className="mb-3 inline-block text-base font-medium text-body-color hover:text-primary"
+                      >
+                        {option}
+                      </a>
+                    </li>
+                  ))}
                 </ul>
               </div>
               <div className="shadow-three mb-10 rounded-sm bg-white dark:bg-gray-dark dark:shadow-none">
                 <h3 className="border-b border-body-color border-opacity-10 px-8 py-4 text-lg font-semibold text-black dark:border-white dark:border-opacity-10 dark:text-white">
-                  Popular Tags
+                  Tags
                 </h3>
                 <div className="flex flex-wrap px-8 py-6">
                   <TagButton text={post.tags[0]} />

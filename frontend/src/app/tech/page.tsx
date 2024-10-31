@@ -21,7 +21,7 @@ async function getTechs() {
         headers: {
           "Content-Type": "application/json",
         },
-        next: { revalidate: 30 },
+        next: { revalidate: 10 },
       },
     );
     const posts = await request.json();
@@ -49,7 +49,7 @@ export default async function Home() {
   return (
     <>
       <ScrollUp />
-      <HeroTech />
+      <HeroTech post={posts[0]} />
       {/* <Options /> */}
       <section className="pb-[120px] pt-[120px]">
         <div className="container">

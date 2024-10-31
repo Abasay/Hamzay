@@ -140,7 +140,8 @@ export const getLatestBlogs = async (req: Request, res: Response) => {
     const blogs = await Blog.find({ blogType: type })
       .sort({ createdAt: -1 })
       .limit(5);
-    console.log(blogs[0].content);
+    // console.log(blogs[0].content);
+    console.log(blogs);
 
     return res.status(200).json({ success: true, data: blogs });
   } catch (error) {
@@ -178,7 +179,28 @@ export const getBlog = async (req: Request, res: Response) => {
     const blog = await Blog.findById(id);
     console.log(blog?.content);
 
-    return res.status(200).json({ success: true, data: blog });
+    let relatedBlogs;
+
+    if (blog) {
+      relatedBlogs = await Blog.find({ category: blog.category }).limit(5);
+    }
+
+    const allBlogs = await Blog.find();
+
+    const allCategories = allBlogs.filter(
+      (blog) => blog.blogType === 'product'
+    );
+
+    const getAllCategories = allCategories.map((category) => category.category);
+    const uniqueCategories = [...new Set(getAllCategories)];
+    console.log(uniqueCategories);
+
+    return res.status(200).json({
+      success: true,
+      data: blog,
+      relatedBlogs,
+      categories: uniqueCategories,
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({ success: false, message: 'Internal server error.' });
@@ -215,6 +237,17 @@ export const uploadPdf = async (req: Request, res: Response) => {
     const pdfLink = await uploadBase64PdfToCloudinary(pdf, 'pdf');
 
     return res.status(200).json({ success: true, data: pdfLink });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: 'Internal server error.' });
+  }
+};
+
+export const getBlogsByCategory = async (req: Request, res: Response) => {
+  try {
+    const { category } = req.params;
+    const blogs = await Blog.find({ category });
+    return res.status(200).json({ success: true, data: blogs });
   } catch (error) {
     console.log(error);
     res.status(500).json({ success: false, message: 'Internal server error.' });

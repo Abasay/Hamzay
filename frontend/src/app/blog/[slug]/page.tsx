@@ -21,6 +21,9 @@ async function getBlogBySlug(slug: string) {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL as string}/api/blog/${slug}`,
+      {
+        next: { revalidate: 10 },
+      },
     );
 
     if (!res.ok) {

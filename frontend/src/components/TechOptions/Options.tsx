@@ -1,54 +1,46 @@
 "use client";
 import React, { useRef, useState } from "react";
 
-const TECHOPTIONS = [
+export const TECHOPTIONS = [
   {
     id: 1,
     title: "Wearable device",
-    image:
-      "https://matjar.themejr.net/wp-content/uploads/2024/07/game-cat.webp",
+    image: "/images/tech/wearables.jpg",
   },
   {
     id: 2,
     title: "Mobile device",
-    image:
-      "https://matjar.themejr.net/wp-content/uploads/2024/07/phone-cat.webp",
+    image: "/images/tech/mobile.jpg",
   },
   {
     id: 3,
     title: "Home devices",
-    image:
-      "https://matjar.themejr.net/wp-content/uploads/2024/07/cat-laptop.webp",
+    image: "/images/tech/home.jpg",
   },
   {
     id: 4,
     title: "Audio devices",
-    image:
-      "https://matjar.themejr.net/wp-content/uploads/2024/07/watch-cat.webp",
+    image: "/images/tech/audio_devices.jpg",
   },
   {
     id: 5,
     title: "Gaming gadget",
-    image:
-      "https://matjar.themejr.net/wp-content/uploads/2024/07/cat-laptop.webp",
+    image: "/images/tech/game.jpg",
   },
   {
     id: 6,
     title: "Accessories",
-    image:
-      "https://matjar.themejr.net/wp-content/uploads/2024/07/watch-cat.webp",
+    image: "/images/tech/accessories.jpg",
   },
   {
     id: 7,
     title: "Travel gadget",
-    image:
-      "https://matjar.themejr.net/wp-content/uploads/2024/07/cat-laptop.webp",
+    image: "/images/tech/travel.jpg",
   },
   {
     id: 8,
     title: "Office gadget",
-    image:
-      "https://matjar.themejr.net/wp-content/uploads/2024/07/cat-laptop.webp",
+    image: "/images/tech/office.jpg",
   },
   {
     id: 9,

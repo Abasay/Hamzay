@@ -82,7 +82,7 @@ export default async function Home() {
     <>
       <ScrollUp />
       <HeroSection />
-      <BlogHighlights blogs={posts} />
+      <BlogHighlights blogPosts={posts} />
       <ProductReviews products={products} />
       <AuthorBio />
       {/* <Hero />
@@ -91,7 +91,7 @@ export default async function Home() {
       {/* <Brands /> */}
       {/* <AboutSectionOne /> */}
       {/* <AboutSectionTwo /> */}
-      <Testimonials />
+      {/* <Testimonials /> */}
       {/* <Pricing /> */}
       <Blog blogs={posts} /> {/* Pass posts to the Blog component */}
       <Contact />

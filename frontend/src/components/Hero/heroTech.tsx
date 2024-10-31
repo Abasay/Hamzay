@@ -4,7 +4,7 @@ import UploadProfileImage from "./file";
 import Options from "../TechOptions/Options";
 import SectionTitle from "../Common/SectionTitle";
 
-const HeroTech = () => {
+const HeroTech = ({ post }: { post: any }) => {
   return (
     <>
       <section
@@ -20,7 +20,7 @@ const HeroTech = () => {
         <div className="relative w-full">
           <div className=" mx-auto">
             <Image
-              src="https://th.bing.com/th/id/OIP.dHLijXUKJHKHUmmmPfXVQgHaEg?rs=1&pid=ImgDetMain"
+              src={post.image}
               alt="Hero Image"
               width={1000}
               height={100}
@@ -30,25 +30,27 @@ const HeroTech = () => {
           {/* <div>
                 <UploadProfileImage />
               </div> */}
+          <div className=" absolute top-0 h-full w-full bg-black bg-opacity-20"></div>
           <div>
-            <div className=" absolute top-[60%] ml-12 flex h-[280px] w-[70%] flex-col gap-3 rounded-2xl bg-slate-100 bg-transparent bg-opacity-15 px-6 py-8 shadow-xl ">
+            <div className=" absolute top-[60%] ml-12 flex max-h-[250px] min-h-[150px] min-w-[200px] max-w-[400px] flex-col gap-3 rounded-2xl bg-slate-300 bg-opacity-15 px-6 py-8 shadow-xl ">
               <span className=" w-[120px] rounded-md bg-blue-600 p-1 text-center tracking-wide text-slate-50">
-                Technology
+                {post.category}
               </span>
               <h2 className="text-3xl font-bold text-zinc-100 ">
-                The impact of Technology on the workplace: How Technology is
-                changing
+                {post.title}
               </h2>
               <div className=" mt-2 flex flex-row items-center gap-3 text-base font-medium text-slate-50 ">
                 <Image
-                  src="/images/hero/hero-img1.png"
+                  src="/images/logo/logo.jpg"
                   alt="Hero Image"
                   width={20}
                   height={20}
                   className="h-[50px] w-[50px] rounded-full object-cover object-center"
                 />
                 <h5>Hamzay Ayodokun</h5>
-                <span className=" ml-4">August 20, 2022</span>
+                <span className=" ml-4">
+                  {new Date(post.createdAt as Date).toDateString()}
+                </span>
               </div>
             </div>
           </div>

@@ -1,53 +1,51 @@
 import SingleBlog from "@/components/Blog/SingleBlog";
-import blogData from "@/components/Blog/blogData";
 import Breadcrumb from "@/components/Common/Breadcrumb";
+import { TECHOPTIONS } from "@/components/TechOptions/Options";
+import { useParams, usePathname, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
-import { Metadata } from "next";
+const CategoryPage: React.FC = () => {
+  const params = useParams();
 
-export const metadata: Metadata = {
-  title: "Blog Page | Blog from Hamzay",
-  description: "This is Blog Page from Hamzay",
-  // other metadata
-};
+  const router = useRouter();
 
-async function getBlogs() {
-  try {
-    const request = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL as string}/api/blogs/latest?type=blog`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        next: { revalidate: 10 },
-      },
+  const [posts, setPosts] = useState([]);
+  const [pageCategory, setPageCategory] = useState("");
+
+  useEffect(() => {
+    const { category } = params;
+
+    if (!category) {
+      router.push("/tech");
+    }
+
+    const searchCategory = TECHOPTIONS.find(
+      (option) => option.title === category,
     );
-    const posts = await request.json();
-    return posts.data;
-  } catch (error) {
-    console.error(error);
-    return [];
-  }
-}
 
-const Blog = async () => {
-  const posts = (await getBlogs()) as [
-    {
-      title: string;
-      description: string;
-      tags: string;
-      category: string;
-      author: string;
-      keywords: string;
-      image: string;
-      slug: string;
-      _id: string;
-    },
-  ];
+    if (!searchCategory) {
+      router.push("/tech");
+    }
+
+    setPageCategory(category as string);
+
+    // Fetch data from API
+    (async () => {
+      const request = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL as string}/api/blogs/category/${category}`,
+      );
+      const posts = await request.json();
+      console.log(posts);
+      setPosts(posts.data);
+      return posts.data;
+    })();
+  }, [params]);
+
   return (
     <>
       <Breadcrumb
-        pageName="Our Blogs"
+        pageName={`Tech Options - ${pageCategory}`}
         description="This is the list of our Blogs"
       />
 
@@ -129,4 +127,4 @@ const Blog = async () => {
   );
 };
 
-export default Blog;
+export default CategoryPage;
