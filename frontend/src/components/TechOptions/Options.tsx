@@ -45,14 +45,12 @@ export const TECHOPTIONS = [
   {
     id: 9,
     title: "Softwares",
-    image:
-      "https://matjar.themejr.net/wp-content/uploads/2024/07/cat-laptop.webp",
+    image: "/images/tech/software.jpg",
   },
   {
     id: 10,
     title: "Health and Fitness",
-    image:
-      "https://matjar.themejr.net/wp-content/uploads/2024/07/cat-laptop.webp",
+    image: "/images/tech/health_and_fitness.jpg",
   },
 ];
 

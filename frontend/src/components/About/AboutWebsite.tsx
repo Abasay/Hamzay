@@ -1,6 +1,6 @@
 export default function AboutWebsite() {
   return (
-    <section className="mt-20 bg-gray-900 py-16 text-white">
+    <section className="mt-24 bg-gray-900 py-16 text-white">
       <div className="container mx-auto text-center">
         <h1 className="mb-6  text-4xl font-bold leading-tight text-zinc-100 dark:text-white sm:text-4xl sm:leading-tight">
           About Techie&apos;s Blog
