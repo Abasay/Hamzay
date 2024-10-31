@@ -1,3 +1,4 @@
+"use client";
 import SingleBlog from "@/components/Blog/SingleBlog";
 import Breadcrumb from "@/components/Common/Breadcrumb";
 import { TECHOPTIONS } from "@/components/TechOptions/Options";
