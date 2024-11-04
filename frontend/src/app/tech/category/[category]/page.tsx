@@ -22,14 +22,14 @@ const CategoryPage: React.FC = () => {
     }
 
     const searchCategory = TECHOPTIONS.find(
-      (option) => option.title === category,
+      (option) => option.link === category,
     );
 
     if (!searchCategory) {
       router.push("/tech");
     }
 
-    setPageCategory(category as string);
+    setPageCategory(searchCategory.title as string);
 
     // Fetch data from API
     (async () => {
@@ -47,8 +47,20 @@ const CategoryPage: React.FC = () => {
     <>
       <Breadcrumb
         pageName={`Tech Options - ${pageCategory}`}
-        description="This is the list of our Blogs"
+        description="This is the list of products"
       />
+      <div className="mt-4">
+        <div className="container mx-auto mt-8 px-4">
+          <div className="rounded-md bg-gray-100 p-4 text-center text-gray-700 shadow-md">
+            <p className=" italic">
+              At 4hmztech, we recommend products and services that we believe
+              in. Our posts include affiliate links which may earn us a small
+              commission at no additional cost to you if you make a purchase
+              through these links.
+            </p>
+          </div>
+        </div>
+      </div>
 
       <section className="pb-[120px] pt-[120px]">
         <div className="container">

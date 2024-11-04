@@ -299,6 +299,18 @@ const HeroTech = ({ post }: { post: any }) => {
             </defs>
           </svg>
         </div>
+        <div className="mt-4">
+          <div className="container mx-auto mt-8 px-4">
+            <div className="rounded-md bg-gray-100 p-4 text-center text-gray-700 shadow-md">
+              <p className=" italic">
+                At 4hmztech, we recommend products and services that we believe
+                in. Our posts include affiliate links which may earn us a small
+                commission at no additional cost to you if you make a purchase
+                through these links.
+              </p>
+            </div>
+          </div>
+        </div>
         <Options />
         {/* <div className="mx-auto my-auto mt-40 flex h-32 w-[70%] flex-col items-center gap-2 rounded-md bg-slate-200 py-3 text-center text-gray-400">
           <span>Advertisement</span>
