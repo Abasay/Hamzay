@@ -5,8 +5,12 @@ import {
   getBlogs,
   getBlogsByCategory,
   getBlogsByType,
+  getContacts,
   getLatestBlog,
   getLatestBlogs,
+  getSubscribers,
+  saveContact,
+  saveSubscriber,
   updateBlog,
   upload,
   uploadImage,
@@ -30,10 +34,15 @@ router.get('/blogs/category/:category', getBlogsByCategory);
 router.get('/blogs/latest', getLatestBlogs);
 router.get('/blog/:id', getBlog);
 
-router.post('/blog/create', upload);
-router.put('/blog/update/:id', updateBlog);
+router.post('/blog/hamzay/4hmztech/hamzayhamzay/create', upload);
+router.put('/blog/hamzay/4hmztech/hamzayhamzay/update/:id', updateBlog);
 
 router.delete('/blog/delete/:id', deleteBlog);
 router.post('/blog/upload/image', uploadImage);
 router.post('/upload/pdf', uploadPdf);
+
+router.post('/contact', saveContact);
+router.get('/contacts', getContacts);
+router.post('/subscribe', saveSubscriber);
+router.get('/subscribers', getSubscribers);
 export default router;

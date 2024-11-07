@@ -1,9 +1,48 @@
 "use client";
 
 import { useTheme } from "next-themes";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
 const NewsLatterBox = () => {
   const { theme } = useTheme();
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/subscribe`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name, email }),
+        },
+      );
+      if (!response.ok) {
+        toast.error("Failed to subscribe, please try again later.");
+        return;
+        // throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      toast.success("Subscribed successfully");
+      // console.log("Success:", data);
+    } catch (error) {
+      // console.error("Error:", error);
+    }
+  };
 
   return (
     <div className="shadow-three relative z-10 rounded-sm bg-white p-8 dark:bg-gray-dark sm:p-11 lg:p-8 xl:p-11">
@@ -19,12 +58,16 @@ const NewsLatterBox = () => {
           type="text"
           name="name"
           placeholder="Enter your name"
+          onChange={handleNameChange}
+          value={name}
           className="border-stroke dark:shadow-two mb-4 w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:focus:border-primary dark:focus:shadow-none"
         />
         <input
           type="email"
           name="email"
           placeholder="Enter your email"
+          onChange={handleEmailChange}
+          value={email}
           className="border-stroke dark:shadow-two mb-4 w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:focus:border-primary dark:focus:shadow-none"
         />
         <input

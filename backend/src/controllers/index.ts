@@ -4,6 +4,8 @@ import {
   uploadBase64PdfToCloudinary,
 } from '../utils';
 import Blog from '../models/blog.model';
+import Contact from '../models/contact.model';
+import Subscriber from '../models/subscribers.model';
 
 export const upload = async (req: Request, res: Response) => {
   try {
@@ -248,6 +250,70 @@ export const getBlogsByCategory = async (req: Request, res: Response) => {
     const { category } = req.params;
     const blogs = await Blog.find({ category });
     return res.status(200).json({ success: true, data: blogs });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: 'Internal server error.' });
+  }
+};
+
+export const saveContact = async (req: Request, res: Response) => {
+  try {
+    const { name, email, message } = req.body;
+
+    if (!name || !email || !message) {
+      return res
+        .status(400)
+        .json({ success: false, message: 'Please fill all fields.' });
+    }
+
+    const contact = await Contact.create({ name, email, message });
+
+    return res
+      .status(201)
+      .json({ success: true, data: 'Contact saved successfully.' });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: 'Internal server error.' });
+  }
+};
+
+export const getContacts = async (req: Request, res: Response) => {
+  try {
+    const contacts = await Contact.find();
+
+    return res.status(200).json({ success: true, data: contacts });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: 'Internal server error.' });
+  }
+};
+
+export const saveSubscriber = async (req: Request, res: Response) => {
+  try {
+    const { name, email } = req.body;
+
+    if (!name || !email) {
+      return res
+        .status(400)
+        .json({ success: false, message: 'Please provide a name and email.' });
+    }
+
+    const subscriber = await Subscriber.create({ name, email });
+
+    return res
+      .status(201)
+      .json({ success: true, data: 'Subscriber saved successfully.' });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: 'Internal server error.' });
+  }
+};
+
+export const getSubscribers = async (req: Request, res: Response) => {
+  try {
+    const subscribers = await Subscriber.find();
+
+    return res.status(200).json({ success: true, data: subscribers });
   } catch (error) {
     console.log(error);
     res.status(500).json({ success: false, message: 'Internal server error.' });
