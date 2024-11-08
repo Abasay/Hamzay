@@ -10,9 +10,11 @@ export default function AuthorBio() {
         <div className="text-center md:ml-8 md:text-left">
           <h2 className="mb-4 text-3xl font-bold">Meet the Author</h2>
           <p className="text-lg text-gray-700">
-            Hello, I’m John Doe, a tech enthusiast and blogger with a passion
-            for writing about the latest gadgets, software, and trends in the
-            tech industry.
+            Hamzat Quadri had undergone sound knowledge in the technological
+            world both physical and online learning under the tutelage of
+            'simplilearn'. He is certified to work in the IT world. A passionate
+            blogger, bringing to your reach trending technological product
+            reviews with ease.
           </p>
         </div>
       </div>

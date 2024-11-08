@@ -27,7 +27,7 @@ const Footer = () => {
                   /> */}
                 </Link>
                 <p className="mb-9 text-base leading-relaxed text-body-color dark:text-body-color-dark">
-                  Hamzay Blog Website, where he talk about tech
+                  Every new horizon is a step to discovering who you are.
                 </p>
                 <div className="flex items-center">
                   <a
